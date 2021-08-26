@@ -47,4 +47,34 @@ app.post('/login', (req, res) => {
 
 });
 
+app.get('/movies', (_,res) => {
+  dataBase.query('SELECT id, year, title, description, director, cast, image FROM movies', (err,result) => {
+    if(err){
+      return console.log('Hubo error')
+    }
+    if(result.length === 0) {
+      return console.log('Se recibio')
+    }
+
+    return res
+      .json({
+        result: result
+      })
+  })
+})
+
+app.post('/movie', (req, res) => {
+
+});
+
+app.get('/favorites', (req,res) => {
+  
+});
+
+app.post('/favorites', (req,res) => {
+
+});
+
+
+
 module.exports = app;
