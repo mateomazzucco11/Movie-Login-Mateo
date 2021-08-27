@@ -3,9 +3,9 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 function verifyToken(req, res, next) {
-    const token = req.headers['accessToken'];
+    const token = req.headers['accesstoken'];
 
-    jwt.verify(token, process.env.ACCESS_TOKEN, (err, email) => {
+    jwt.verify(token, process.env.ACCESS_TOKEN, (err, resp) => {
         if (err) {
             return res
                 .status(500)
@@ -13,7 +13,9 @@ function verifyToken(req, res, next) {
                     msg: 'There was a problem on the server'
                 })
         }
-        return req.email = email;
+
+        req.email = resp.email;
+        req.admin = resp.admin;
 
         next();
     })

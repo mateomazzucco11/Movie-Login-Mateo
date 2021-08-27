@@ -34,24 +34,27 @@ app.post('/login', (req, res) => {
         });
     }
 
-    const accessToken = jwt.sign({email: email}, process.env.ACCESS_TOKEN, {
+    const [{admin}] = result
+
+    const accessToken = jwt.sign({email, admin}, process.env.ACCESS_TOKEN, {
       expiresIn: 86400, //24hs
     });
-
-    const [{admin}] = result
 
     return res
       .status(200)
       .json({
         msg: 'Successful entry',
         accessToken,
-        admin,
       });
   });
 
 });
 
-app.get('/movies', (_,res) => {
+app.get('/movies', verifyToken, (req,res) => {
+
+  if(req.admin = 1 ) {
+    console.log('Soy administrador')
+  }
 
   dataBase.query('SELECT id, year, title, description, director, cast, image FROM movies', (err,result) => {
     if(err){
@@ -65,7 +68,7 @@ app.get('/movies', (_,res) => {
       return res
         .status(400)
         .json({
-          msg: 'No movie found'
+          msg: 'There are no movies in the database',
         });
     }
 
@@ -78,20 +81,23 @@ app.get('/movies', (_,res) => {
   
 });
 
-app.post('/movie', verifyToken, (req, res) => {
+app.post('/editmovies', verifyToken, (req, res) => {
   
-  dataBase.query('SELECT admin FROM user')
+  if(req.admin = 1 ) {
+    console.log('Soy administrador')
+  }
+
 
 });
 
-app.get('/favorites', (req,res) => {
+/* app.get('/favorites', (req,res) => {
   
 });
 
 app.post('/favorites', (req,res) => {
 
 });
-
+ */
 
 
 module.exports = app;
