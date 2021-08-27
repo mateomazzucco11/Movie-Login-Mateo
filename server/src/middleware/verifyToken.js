@@ -10,7 +10,7 @@ function verifyToken(req, res, next) {
             return res
                 .status(500)
                 .json({
-                    msg: 'There was a problem on the server'
+                    msg: 'The token does not exist'
                 })
         }
 

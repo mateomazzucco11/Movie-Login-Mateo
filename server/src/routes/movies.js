@@ -50,13 +50,9 @@ app.post('/login', (req, res) => {
 
 });
 
-app.get('/movies', verifyToken, (req,res) => {
+app.get('/movies', (_,res) => {
 
-  if(req.admin = 1 ) {
-    console.log('Soy administrador')
-  }
-
-  dataBase.query('SELECT id, year, title, description, director, cast, image FROM movies', (err,result) => {
+  dataBase.query('SELECT id, year, title, description, director, cast, image FROM movies WHERE del = false', (err,result) => {
     if(err){
       return res
         .status(500)
@@ -75,20 +71,85 @@ app.get('/movies', verifyToken, (req,res) => {
     return res
       .status(200)
       .json({
-        result
+        result,
       });
   });
   
 });
 
-app.post('/editmovies', verifyToken, (req, res) => {
+app.put('/movies/:id', verifyToken, (req, res) => {
+  const { title, year, gender, description, director, cast, image } = req.body;
+  const { id } = req.params;
   
-  if(req.admin = 1 ) {
-    console.log('Soy administrador')
-  }
+  if(req.admin === 'false' ) {
+    return res
+      .status(400)
+      .json({
+        msg: 'This user is not an administrator',
+      });
+  };
 
+  dataBase.query('UPDATE movies SET title = ?, year = ?, gender = ?, description = ?, director = ?, cast = ?, image = ? WHERE id = ?', [title, year, gender, description, director, cast, image, id], (err, result) => {
+    if (err) {
+      return res
+        .status(500)
+        .json({
+          msg: 'There was a problem on the server',
+        })
+    }
 
+    if(result.changedRows > 0) {
+      return res
+        .status(200)
+        .json({
+          msg:'Edited successfully',
+        });
+    } else {
+      return res
+        .status(400)
+        .json({
+          msg: 'Could not be edited',
+        });
+    }
+  });
 });
+
+app.delete('/movies/:id', verifyToken, (req,res) => {
+  const { id } = req.params;
+
+  if(req.admin === 'false' ) {
+    return res
+      .status(400)
+      .json({
+        msg: 'This user is not an administrator',
+      });
+  };
+
+  dataBase.query('UPDATE movies SET del = ? WHERE id = ?', ['true', id], (err, result) => {
+    if (err) {
+      return res
+        .status(500)
+        .json({
+          msg: 'There was a problem on the server',
+        })
+    }
+
+    if(result.changedRows > 0) {
+      return res
+        .status(200)
+        .json({
+          msg:'Delete successfully',
+        });
+    } else {
+      return res
+        .status(400)
+        .json({
+          msg: 'Could not be removed',
+        });
+    }
+
+  })
+})
 
 /* app.get('/favorites', (req,res) => {
   
