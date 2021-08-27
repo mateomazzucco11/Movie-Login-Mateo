@@ -1,6 +1,7 @@
 const express = require('express');
 const dataBase = require('../helpers/db/connect');
 const jwt = require('jsonwebtoken');
+const verifyToken = require('../middleware/verifyToken');
 
 require('dotenv').config();
 
@@ -17,7 +18,7 @@ app.post('/login', (req, res) => {
       });
   }
 
-  dataBase.query('SELECT email AND password FROM users WHERE email = ? AND password = ?', [email, password], (err, result) => {
+  dataBase.query('SELECT email, password, admin FROM users WHERE email = ? AND password = ?', [email, password], (err, result) => {
     if (err) {
       return res
         .status(500)
@@ -37,33 +38,49 @@ app.post('/login', (req, res) => {
       expiresIn: 86400, //24hs
     });
 
+    const [{admin}] = result
+
     return res
       .status(200)
       .json({
         msg: 'Successful entry',
-        accessToken
+        accessToken,
+        admin,
       });
   });
 
 });
 
 app.get('/movies', (_,res) => {
+
   dataBase.query('SELECT id, year, title, description, director, cast, image FROM movies', (err,result) => {
     if(err){
-      return console.log('Hubo error')
+      return res
+        .status(500)
+        .json({
+          msg: 'There was a problem on the server',
+        });
     }
     if(result.length === 0) {
-      return console.log('Se recibio')
+      return res
+        .status(400)
+        .json({
+          msg: 'No movie found'
+        });
     }
 
     return res
+      .status(200)
       .json({
-        result: result
-      })
-  })
-})
+        result
+      });
+  });
+  
+});
 
-app.post('/movie', (req, res) => {
+app.post('/movie', verifyToken, (req, res) => {
+  
+  dataBase.query('SELECT admin FROM user')
 
 });
 
