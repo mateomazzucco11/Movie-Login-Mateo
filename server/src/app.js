@@ -1,12 +1,10 @@
 const express = require('express');
-
 const app = express();
-
-const moviesRoute = require('./routes/movies');
+const index = require('./routes/index');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use('/', moviesRoute);
+app.use('/', index);
 
 module.exports = app;
