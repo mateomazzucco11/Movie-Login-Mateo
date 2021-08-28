@@ -1,5 +1,6 @@
 const express = require('express');
 const dataBase = require('../../helpers/db/connect');
+const verifyAdmin = require('../../middleware/verifyAdmin');
 const verifyToken = require('../../middleware/verifyToken');
 require('dotenv').config();
 
@@ -29,17 +30,9 @@ app.get('/movies', (_,res) => {
   
 });
 
-app.put('/movies/:id', verifyToken, (req, res) => {
+app.put('/movies/:id', [verifyToken, verifyAdmin], (req, res) => {
   const { title, year, gender, description, director, cast, image } = req.body;
   const { id } = req.params;
-  
-  if(req.admin === 'false' ) {
-    return res
-      .status(400)
-      .json({
-        msg: 'This user is not an administrator',
-      });
-  };
 
   dataBase.query('UPDATE movies SET title = ?, year = ?, gender = ?, description = ?, director = ?, cast = ?, image = ? WHERE id = ?', [title, year, gender, description, director, cast, image, id], (err, result) => {
     if (err) {
@@ -66,16 +59,8 @@ app.put('/movies/:id', verifyToken, (req, res) => {
   });
 });
 
-app.delete('/movies/:id', verifyToken, (req,res) => {
+app.delete('/movies/:id', [verifyToken, verifyAdmin], (req,res) => {
   const { id } = req.params;
-
-  if(req.admin === 'false' ) {
-    return res
-      .status(400)
-      .json({
-        msg: 'This user is not an administrator',
-      });
-  };
 
   dataBase.query('UPDATE movies SET del = ? WHERE id = ?', ['true', id], (err, result) => {
     if (err) {
