@@ -1,8 +1,5 @@
 import React from 'react'
 import { AppRouter } from './routers/AppRouter'
 
-export const MoviesApp = () => {
-    return (
-        <AppRouter />
-    )
-}
+export const MoviesApp = () => <AppRouter />
+
