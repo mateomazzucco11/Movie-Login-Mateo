@@ -1,7 +1,8 @@
 import React from 'react';
 import {
     Route,
-    Switch
+    Redirect,
+    Switch,
 } from 'react-router-dom';
 
 import { LoginScreen } from '../components/auth/LoginScreen'
@@ -15,6 +16,8 @@ export const AuthRouter = () => {
                     path='/auth/login'
                     component={LoginScreen}
                 />
+
+                <Redirect to='/auth/login' />
             </Switch>
         </div>
     )

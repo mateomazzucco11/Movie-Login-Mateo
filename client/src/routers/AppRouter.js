@@ -24,7 +24,7 @@ export const AppRouter = () => {
                         component={MoviesScreen}
                     />
 
-                    <Redirect to='/auth' />
+                    <Redirect to='/login' />
                 </Switch>
             </div>
         </Router>
