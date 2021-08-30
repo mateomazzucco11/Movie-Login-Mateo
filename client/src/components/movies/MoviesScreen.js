@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getMovies } from '../../helpers/getMovies';
 
-import jwt from 'jsonwebtoken'
+import jwt from 'jsonwebtoken';
 
 import { MovieCard } from './MovieCard';
 import { NavBar } from './NavBar';
@@ -29,18 +29,19 @@ export const MoviesScreen = ({category}) => {
   }, [category])
 
   return (
-    <div>
+    <div className='movies__screen-content'>
       <NavBar admin={admin}/>
-      <div>
+      <ul className='movies__content'>
         {
           movies.map(data => (
             <MovieCard
               key={data.id}
               {...data}
+              admin={admin}
             />
           ))
         }
-      </div>
+      </ul>
     </div>
   )
 }

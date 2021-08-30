@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 export const NavBar = ({admin}) => {
   const history = useHistory();
@@ -15,6 +15,17 @@ export const NavBar = ({admin}) => {
 
   return (
     <div>
+      {
+        (admin)
+        ?
+        <Link
+          to='/favorites'
+        >
+          Favorites
+        </Link>
+        :
+        null
+      }
       {
         admin
         ?

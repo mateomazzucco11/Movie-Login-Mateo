@@ -6,6 +6,7 @@ import {
   Switch
 } from 'react-router-dom';
 
+import { FavoriteScreen } from '../components/favorites/FavoriteScreen';
 import { MoviesScreen } from '../components/movies/MoviesScreen'
 import { AuthRouter } from './AuthRouter'
 
@@ -22,6 +23,11 @@ export const AppRouter = () => {
             exact
             path='/'
             component={MoviesScreen}
+          />
+          <Route 
+            exact
+            path='/favorites'
+            component={FavoriteScreen}
           />
 
           <Redirect to='/' />

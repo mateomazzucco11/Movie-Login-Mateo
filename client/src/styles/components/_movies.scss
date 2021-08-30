@@ -1,0 +1,116 @@
+// Movies Card
+
+.movies__card-content {
+  height: 100%;
+  list-style: none;
+  position: relative;
+  width: 100%;
+}
+
+.movies__content-title {
+  align-items: center;
+  background: $primary;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  display: flex;
+  font-size: .75rem;
+  height: 14%;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  .favorite-button {
+    border: transparent;
+    background: $white;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: .425rem;
+    padding: .625rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: padding .5s ease;
+    &:hover {
+      padding: .925rem;
+    }
+  }
+  .edit-button {
+    border: transparent;
+    background: $white;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: .425rem;
+    padding: .625rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: padding .5s ease;
+    &:hover {
+      padding: .925rem;
+    }
+  }
+  
+}
+
+.movies__content-image {
+  width: 100%;
+  height: 85.9%;
+}
+
+.movies__card-image {
+  height: 100%;
+  width: 100%;
+}
+
+.description-button {
+  bottom: 0;
+  border: none;
+  background: $priviliged;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  cursor: pointer;
+  position: absolute;
+  height: 2.25rem;
+  transition: background .5s ease;
+  width: 100%;
+  &:hover {
+    background: darken($priviliged, 8)
+  }
+}
+
+.movies__content-description {
+  background: $black;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  color: $white;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  opacity: .6;
+  width: 100%;
+  span {
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: underline;
+  }
+  p {
+    padding: 1.875rem 0;
+    font-size: 0.875rem;
+  }
+}
+
+// Movies Screen
+
+.movies__screen-content {
+  height: 100%;
+  width: 95%;
+}
+
+.movies__content {
+  display: grid;
+  grid-gap: .7rem;
+  grid-template-columns: repeat(3, 1fr);
+}
