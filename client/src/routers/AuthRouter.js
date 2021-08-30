@@ -8,17 +8,17 @@ import {
 import { LoginScreen } from '../components/auth/LoginScreen'
 
 export const AuthRouter = () => {
-    return (
-        <div>
-            <Switch>
-                <Route 
-                    exact
-                    path='/auth/login'
-                    component={LoginScreen}
-                />
+	return (
+		<div>
+			<Switch>
+				<Route 
+					exact
+					path='/auth/login'
+					component={LoginScreen}
+				/>
 
-                <Redirect to='/auth/login' />
-            </Switch>
-        </div>
-    )
+				<Redirect to='/auth/login' />
+			</Switch>
+		</div>
+	)
 }
