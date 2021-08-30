@@ -10,10 +10,10 @@ app.post('/login', (req, res) => {
 
   if (!email || !password) {
     return res
-      .status(400)
       .json({
         msg: 'There is no email or password',
-      });
+      })
+      .status(400)
   }
 
   dataBase.query('SELECT email, password, admin FROM users WHERE email = ? AND password = ?', [email, password], (err, result) => {
@@ -26,10 +26,10 @@ app.post('/login', (req, res) => {
   }
   if (result.length === 0) {
     return res
-      .status(400)
       .json({
         msg: 'The email or password entered are invalid',
-      });
+      })
+      .status(400)
   }
 
   const [{admin}] = result
