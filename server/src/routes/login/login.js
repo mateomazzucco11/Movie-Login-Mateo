@@ -16,7 +16,7 @@ app.post('/login', (req, res) => {
       .status(400)
   }
 
-  dataBase.query('SELECT email, password, admin FROM users WHERE email = ? AND password = ?', [email, password], (err, result) => {
+  dataBase.query('SELECT id, email, password, admin FROM users WHERE email = ? AND password = ?', [email, password], (err, result) => {
   if (err) {
     return res
       .status(500)
@@ -32,9 +32,9 @@ app.post('/login', (req, res) => {
       .status(400)
   }
 
-  const [{admin}] = result
+  const [{admin, id}] = result
 
-  const accessToken = jwt.sign({email, admin}, process.env.ACCESS_TOKEN, {
+  const accessToken = jwt.sign({ admin, id}, process.env.ACCESS_TOKEN, {
     expiresIn: 86400, //24hs
   });
 
