@@ -1,0 +1,16 @@
+.navbar__content {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  height: 80px;
+  padding: 20px 0;
+  background-color: $primary;
+  p {
+    .privileged {
+      color: $priviliged;
+    }
+    .no-privileged {
+      color: $not-priviliged;
+    }
+  }
+}
