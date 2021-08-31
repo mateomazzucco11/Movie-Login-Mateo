@@ -14,15 +14,22 @@ export const NavBar = ({admin}) => {
   }
 
   return (
-    <div>
+    <div className='navbar__content'>
       {
         (admin)
         ?
-        <Link
-          to='/favorites'
-        >
-          Favorites
-        </Link>
+        <>
+          <Link
+            to='/'
+          >
+            Home
+          </Link>
+          <Link
+            to='/favorites'
+          >
+            Favorites
+          </Link>
+        </>
         :
         null
       }
@@ -32,12 +39,19 @@ export const NavBar = ({admin}) => {
           (admin === 'false')
           ?
             <p>
-              User: <span>Not privileged</span>
+              User: <span className='not-privileged'>Not privileged</span>
             </p>
           :
-            <p>
-              User: <span>Privileged</span>
-            </p>
+            <>
+              <p>
+                User: <span className='privileged'>Privileged</span>
+              </p>
+              <Link
+                to='/addmovie'
+              >
+                Addmovie
+              </Link>
+            </>
         :
         null
       }
