@@ -1,7 +1,6 @@
 export const getMovies = async () => {
   const resp = await fetch('http://localhost:3003/movies');
   const data = await resp.json();
-  console.log(data)
 
   const movies = data.map(inf => {
     return {
