@@ -1,10 +1,26 @@
 // Movies Card
+.favorite-button {
+  border: transparent;
+  background: $white;
+  border-radius: 50%;
+  cursor: pointer;
+  margin: .425rem;
+  padding: .625rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: padding .5s ease;
+  &:hover {
+    padding: .925rem;
+  }
+}
 
 .movies__card-content {
   height: 100%;
   list-style: none;
   position: relative;
   width: 100%;
+  margin-top: 2.5rem;
 }
 
 .movies__content-title {
@@ -14,10 +30,15 @@
   border-top-right-radius: 6px;
   display: flex;
   font-size: .75rem;
+  flex-wrap: nowrap;
+  flex-direction: column;
   height: 14%;
   justify-content: center;
   position: relative;
   width: 100%;
+  h1{
+    position: absolute;
+  }
   .favorite-button {
     border: transparent;
     background: $white;
@@ -43,6 +64,21 @@
     position: absolute;
     left: 0;
     top: 0;
+    transition: padding .5s ease;
+    &:hover {
+      padding: .925rem;
+    }
+  }
+  .remove-button {
+    border: transparent;
+    background: #000;
+    border-radius: 50%;
+    cursor: pointer;
+    margin: .425rem;
+    padding: .625rem;
+    position: absolute;
+    left: 45%;
+    top: -25px;
     transition: padding .5s ease;
     &:hover {
       padding: .925rem;
@@ -100,6 +136,35 @@
     padding: 1.875rem 0;
     font-size: 0.875rem;
   }
+}
+
+.edit-movie-on {
+  opacity: 1;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 200%;
+  left: 0;
+  width: 100%;
+  background: opacity($color: #000000);
+  input {
+    margin: 10px 0;
+  }
+  button {
+    margin-top: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    color: #000;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: bold;
+  }
+}
+.edit-movie-off {
+  opacity: 0;
+  display: none;
 }
 
 // Movies Screen
