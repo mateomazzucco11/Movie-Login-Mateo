@@ -9,7 +9,7 @@ import { LoginScreen } from '../components/auth/LoginScreen'
 
 export const AuthRouter = () => {
 	return (
-		<div>
+		<div className='max-width'>
 			<Switch>
 				<Route 
 					exact
