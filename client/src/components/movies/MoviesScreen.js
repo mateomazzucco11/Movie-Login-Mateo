@@ -6,13 +6,13 @@ import jwt from 'jsonwebtoken';
 import { MovieCard } from './MovieCard';
 import { NavBar } from './NavBar';
 
-export const MoviesScreen = ({category}) => {
+export const MoviesScreen = () => {
   const [movies, setMovies] = useState([])
   const secretKey = process.env.REACT_APP_SECRET_KEY
   
   let dataUser = {
     admin: '',
-    email: '',
+    id: '',
   };
   let token;
 
@@ -21,12 +21,13 @@ export const MoviesScreen = ({category}) => {
     dataUser = jwt.verify(token, secretKey);
   }
 
-  const {admin, email} = dataUser
+
+  const {admin, id:userId} = dataUser
 
   useEffect(() => {
-    getMovies(category)
+    getMovies()
       .then(movies => setMovies(movies))
-  }, [category])
+  }, [])
 
   return (
     <div className='movies__screen-content'>
@@ -38,6 +39,8 @@ export const MoviesScreen = ({category}) => {
               key={data.id}
               {...data}
               admin={admin}
+              userId={userId}
+              token={token}
             />
           ))
         }
