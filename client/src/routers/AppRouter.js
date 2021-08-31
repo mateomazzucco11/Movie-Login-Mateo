@@ -7,13 +7,14 @@ import {
 } from 'react-router-dom';
 
 import { FavoriteScreen } from '../components/favorites/FavoriteScreen';
+import { AddMovie } from '../components/movies/AddMovie';
 import { MoviesScreen } from '../components/movies/MoviesScreen'
 import { AuthRouter } from './AuthRouter'
 
 export const AppRouter = () => {
   return (
-    <Router>
-      <div>
+    <Router className='max-width'>
+      <div className='max-width'>
         <Switch>
           <Route
             path='/auth'
@@ -28,6 +29,11 @@ export const AppRouter = () => {
             exact
             path='/favorites'
             component={FavoriteScreen}
+          />
+          <Route
+            exact
+            path='/addmovie'
+            component={AddMovie}
           />
 
           <Redirect to='/' />
