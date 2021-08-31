@@ -1,0 +1,19 @@
+.addmovie__content {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  width: 100%;
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    input {
+      margin: 1.25rem 0;
+      padding: 0 10px;
+      height: 40px;
+      width: 100%;
+    }
+  }
+}
