@@ -1,4 +1,4 @@
-<h1>Avalith Skill Factory - Fullstack Movie App</h1>
+<h1>Fullstack Movie App</h1>
 
 <h2>Enunciado</h2>
 
